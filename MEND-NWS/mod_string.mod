@@ -1,0 +1,78 @@
+GFORTRAN module version '10' created from src/MOD_STRING.F90
+MD5:883436839f6c92e1d44c0447940cb176 -- If you edit this, you'll get what you deserve.
+
+(() () () () () () () () () () () () () () () () () () () () () () () ()
+() () ())
+
+()
+
+(('strclean' 'mod_string' 2 3))
+
+()
+
+()
+
+()
+
+(4 'strcompress' 'mod_string' '' 1 ((PROCEDURE UNKNOWN-INTENT
+MODULE-PROC DECL UNKNOWN 0 0 FUNCTION ALWAYS_EXPLICIT) (CHARACTER 1 0 0
+0 CHARACTER ((FUNCTION (INTEGER 4 0 0 0 INTEGER ()) 0 5 (('' (VARIABLE (
+CHARACTER 1 0 0 0 CHARACTER (())) 0 6 ())) ('' ())) '__len_1_i4' 0 'len')))
+7 0 (6 8) () 9 () () () 0 0)
+10 'strlowcase' 'mod_string' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC
+DECL UNKNOWN 0 0 FUNCTION IMPLICIT_PURE) (CHARACTER 1 0 0 0 CHARACTER (
+(FUNCTION (INTEGER 4 0 0 0 INTEGER ()) 0 11 (('' (VARIABLE (CHARACTER 1
+0 0 0 CHARACTER (())) 0 12 ())) ('' ())) '__len_1_i4' 0 'len'))) 13 0 (
+12) () 14 () () () 0 0)
+15 'strupcase' 'mod_string' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC
+DECL UNKNOWN 0 0 FUNCTION IMPLICIT_PURE) (CHARACTER 1 0 0 0 CHARACTER (
+(FUNCTION (INTEGER 4 0 0 0 INTEGER ()) 0 16 (('' (VARIABLE (CHARACTER 1
+0 0 0 CHARACTER (())) 0 17 ())) ('' ())) '__len_1_i4' 0 'len'))) 18 0 (
+17) () 19 () () () 0 0)
+2 'strclean_rank1' 'mod_string' '' 1 ((PROCEDURE UNKNOWN-INTENT
+MODULE-PROC DECL UNKNOWN 0 0 SUBROUTINE ALWAYS_EXPLICIT) (UNKNOWN 0 0 0
+0 UNKNOWN ()) 20 0 (21) () 0 () () () 0 0)
+3 'strclean_scalar' 'mod_string' '' 1 ((PROCEDURE UNKNOWN-INTENT
+MODULE-PROC DECL UNKNOWN 0 0 SUBROUTINE IMPLICIT_PURE) (UNKNOWN 0 0 0 0
+UNKNOWN ()) 22 0 (23) () 0 () () () 0 0)
+5 'len' '(intrinsic)' '' 7 ((PROCEDURE UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 FUNCTION) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 5 ()
+() () 0 0)
+6 'input_string' '' '' 7 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DUMMY) (CHARACTER 1 0 0 0 CHARACTER (())) 0 0 () () 0 () () () 0 0)
+8 'n' '' '' 7 ((VARIABLE OUT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0 OPTIONAL
+DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+9 'output_string' '' '' 7 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+UNKNOWN 0 0 RESULT ALWAYS_EXPLICIT) (CHARACTER 1 0 0 0 CHARACTER ((
+FUNCTION (INTEGER 4 0 0 0 INTEGER ()) 0 5 (('' (VARIABLE (CHARACTER 1 0
+0 0 CHARACTER (())) 0 6 ())) ('' ())) '__len_1_i4' 0 'len'))) 0 0 () ()
+0 () () () 0 0)
+11 'len' '(intrinsic)' '' 13 ((PROCEDURE UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 FUNCTION) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 11
+() () () 0 0)
+12 'input_string' '' '' 13 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN 0
+0 DUMMY) (CHARACTER 1 0 0 0 CHARACTER (())) 0 0 () () 0 () () () 0 0)
+14 'output_string' '' '' 13 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 RESULT) (CHARACTER 1 0 0 0 CHARACTER ((FUNCTION (
+INTEGER 4 0 0 0 INTEGER ()) 0 11 (('' (VARIABLE (CHARACTER 1 0 0 0
+CHARACTER (())) 0 12 ())) ('' ())) '__len_1_i4' 0 'len'))) 0 0 () () 0 ()
+() () 0 0)
+16 'len' '(intrinsic)' '' 18 ((PROCEDURE UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 FUNCTION) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 16
+() () () 0 0)
+17 'input_string' '' '' 18 ((VARIABLE IN UNKNOWN-PROC UNKNOWN UNKNOWN 0
+0 DUMMY) (CHARACTER 1 0 0 0 CHARACTER (())) 0 0 () () 0 () () () 0 0)
+19 'output_string' '' '' 18 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN UNKNOWN 0 0 RESULT) (CHARACTER 1 0 0 0 CHARACTER ((FUNCTION (
+INTEGER 4 0 0 0 INTEGER ()) 0 16 (('' (VARIABLE (CHARACTER 1 0 0 0
+CHARACTER (())) 0 17 ())) ('' ())) '__len_1_i4' 0 'len'))) 0 0 () () 0 ()
+() () 0 0)
+21 'string' '' '' 20 ((VARIABLE INOUT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DIMENSION DUMMY) (CHARACTER 1 0 0 0 CHARACTER (())) 0 0 () (1 0
+ASSUMED_SHAPE (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') ()) 0 () ()
+() 0 0)
+23 'string' '' '' 22 ((VARIABLE INOUT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0
+DUMMY) (CHARACTER 1 0 0 0 CHARACTER (())) 0 0 () () 0 () () () 0 0)
+)
+
+('strcompress' 0 4 'strlowcase' 0 10 'strupcase' 0 15)
