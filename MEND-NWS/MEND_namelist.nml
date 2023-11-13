@@ -10,7 +10,7 @@
 !! iModel = 3: Sobol Sensitivity; 
 !! iModel = 4: MCMC (Markov Chain Monte Carlo)
 !! iModel = 5: COFI (Critical Objective Function Index): output both UQpar.out & UQvar.out; 
-    iModel = 0
+    iModel = 1
 
 !!select a range of rows to compute obj for iModel=3
     iSA_range(1:2) = 293821, 300000 
@@ -25,15 +25,15 @@
     sSOM = 'SOL'
 !!----------------------------------------------------------------------------------    
 !!Directories for input and output
-    Dir_Input   = 'userio/inp_warming/'
-    Dir_Output  = 'userio/out/warming'
+    Dir_Input   = 'userio/inp_control/'
+    Dir_Output  = 'userio/out/c_p0'
 !!----------------------------------------------------------------------------------
 !!All Input Data (Temperature|Water|Litter) starting|ending date
     ssDate_beg_all = '20090901'
     ssDate_end_all = '20170831'
 !!Simulation starting|ending date [CURRENTLY sDate_beg_sim >= sDate_beg_all]
     ssDate_beg_sim = '20090901'
-    ssDate_end_sim = '20170831'
+    ssDate_end_sim = '20150831'
 !!----------------------------------------------------------------------------------
 !!soil initialization file; 
     sSOIL_INI_file = 'SOIL_INI.dat'
@@ -88,8 +88,8 @@
     ssDate_beg_inp2 = '20090801'
     ssDate_end_inp2 = '20111031'
 
-!!SIN_C12_C14 [ratio of C12 to C14 in SOC input changed to relative abundance of C13, 1 means all GPP labeled as C13];   
-    sSIN_C12_C14 = 0.5
+!!SIN_C12_C14 [ratio of C12 to C14 in SOC input];   
+    sSIN_C12_C14 = 2.0d5
 !!SIN_Multiplier [multiplier for litter input during post-data period simulation]
     sSIN_Multiplier = 1.0
 
@@ -195,7 +195,7 @@
 !!----------------------------------------------------------------------------------
 !! SCE parameters
 !!                                maxn        kstop       pcento      ngs     nrun    ideflt
-    SCE_Parameters =            10000.0,    10.0,       0.0001,     2.0,    5.0,   1.0
+    SCE_Parameters =            10000.0,    10.0,       0.0001,     2.0,    2.0,   1.0
 !!                              npg         nps         nspl        mings   iniflg  iprint
     SCE_control_Parameters =    13,         7,          13,         2,      1,      1
 
@@ -213,7 +213,7 @@
     Pinitial(3:5)   =   1.0,    10.0,    2.0
     Plow(3:5)       =   0.1,    1.0,    0.1
     Phigh(3:5)      =   1.0,    100.0,  50.0
-    Pcal(3:5)       =   0,      1,      0
+    Pcal(3:5)       =   0,      0,      0
 
     Pname(6:8)      =   'KP1',  'fKM',  'PAR3'
     Pinitial(6:8)   =   58.0,   6.0,    500.0
@@ -237,7 +237,7 @@
     Pinitial(15:16) =   0.5,   0.38
     Plow(15:16)     =   0.1,    0.1
     Phigh(15:16)    =   0.9,    1.0
-    Pcal(15:16)     =   1,      0
+    Pcal(15:16)     =   0,      0
 
     Pname(17:19)    =   'Vg',   'alpha','KD'
     Pinitial(17:19) =   0.05,   0.04,    0.26
@@ -255,7 +255,7 @@
     Pinitial(22:24) =   2.0,    1.0,    0.001
     Plow(22:24)     =   1.2,    0.01,   0.0005
     Phigh(22:24)    =   2.5,    20.0,   0.01
-    Pcal(22:24)     =   1,      0,      0
+    Pcal(22:24)     =   0,      0,      0
 
     Pname(25:27)    =   'WPA2D','tau',  'wdorm'
     Pinitial(25:27) =   0.4,    0.25,   4.0
@@ -276,7 +276,7 @@
     Pcal(31:33)     =   0,      0,      0
 
  !!                   LF0              r0            fINP              VP            PAR1             KP1            fKM            PAR3            Qmax             Kba            Kdes              rE             pEP            fpEM              fD              gD              Vg           alpha              KD              Yg            Ygsl             Q10           gamma            beta           WPA2D             tau           wdorm         VNup_MB        KsNH4_MB        KsNO3_MB            Vnit          Vdenit            PAR4
-    Pinitial =       0.90000000,     0.20000000,     0.44000000,    75.00000000,     2.00000000,   100.00000000,     6.00000000,   492.00000000,     2.50000000,     6.00000000,     0.00600000,     0.00011671,     0.00112179,     2.96755608,     0.89861772,     0.99920673,     0.02851858,     0.04998506,     0.00056197,     0.26647437,     0.00101457,     1.39388095,    14.44399126,     0.00972940,     0.03347875,     0.25000000,     4.00000000,     0.04999182,     0.00010000,     0.00010000,     0.02651949,     0.02614681,     1.00000000,
+    Pinitial =       0.90000000,     0.20000000,     0.44000000,    75.00000000,     2.00000000,   100.00000000,     6.00000000,   492.00000000,     2.50000000,     6.00000000,     0.00600000,     0.003,     0.01000000,     1.000000,     0.50000000000000,     0.380000,     0.05000000,     0.0400000,     0.2600000,     0.3000000,     0.0100000,     2.00000000,    1.000000000000,     0.0010000,     0.4000000,     0.25000000,     4.00000000,     0.04999182,     0.00010000,     0.00010000,     0.02651949,     0.02614681,     1.00000000,
 
 
 

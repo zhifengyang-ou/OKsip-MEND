@@ -7,7 +7,7 @@ MODULE MOD_MEND_TYPE
      ! ``STRUCTURE /name/ ... END STRUCTURE'' becomes
      ! ``TYPE name ... END TYPE''
      ! ``RECORD /name/ variable'' becomes ``TYPE(name) variable''
-    INTEGER, PARAMETER:: const_nPOOL        = 16                    !# of state variables in sMEND_POOL
+    INTEGER, PARAMETER:: const_nPOOL        = 17                    !# of state variables in sMEND_POOL
     INTEGER, PARAMETER:: const_nPOOL_MN     = 4                     !# of state variables in sMEND_POOL_MN
     INTEGER, PARAMETER:: const_nFLUX        = 29                    !# of flux variables in sMEND_FLUX
     INTEGER, PARAMETER:: const_nFLUX_MN     = 21                    !# of flux variables in sMEND_FLUX_MN
@@ -83,7 +83,8 @@ MODULE MOD_MEND_TYPE
          REAL(8) ENZ                        ![mg C/g soil],TOTAL ENZYME BIOMASS = SUM(ENZP) + ENZM
          REAL(8) ENZP(const_nPOM)           ![mg C/g soil],ENZyme for POM
          REAL(8) ENZM                       ![mg C/g soil],Enzyme for MAOC 
-         REAL(8) TM_err                     ![-],default = 0, mass balance check error = (POOL_end - POOL_beg)-(TOTinp - TOTout)    
+         REAL(8) TM_err                     ![-],default = 0, mass balance check error = (POOL_end - POOL_beg)-(TOTinp - TOTout)
+         REAL(8) CO2                        ![mg C/g soil],cumulative CO2 in the soil		 
      END TYPE sMEND_POOL
 !-----------------------------------------------------------------------------!
      TYPE sMEND_POOL_MN
@@ -211,15 +212,15 @@ MODULE MOD_MEND_TYPE
          REAL(8) SWP                                    ![MPa],soil water potential [-]
          REAL(8) dt                                     ![h], time-step, dt = 0.5 h for CLM 
 
-!         TYPE(sMEND_CADD) CADD                          !external carbon input
-!         TYPE(sMEND_CADD) CADDI(const_nISO)             !external carbon input (isotopes)
+         TYPE(sMEND_FLUX) CADD                          !external carbon input
+         TYPE(sMEND_FLUX) CADDI(const_nISO)             !external carbon input (isotopes)
          TYPE(sMEND_POOL)       CPOOL                   !organic C pools
          TYPE(sMEND_POOL)       NPOOL                   !organic N pools
          TYPE(sMEND_POOL)       CN                      !C:N Ratio in OM pools
          TYPE(sMEND_POOL_MN)    MNPOOL                  !mineral pools
-!         TYPE(sMEND_CPOOL) CPOOLI(const_nISO)           !isotopic carbon pools
-!         TYPE(sMEND_CPOOL) CPOOLIFR(const_nISO)         !isotopic fraction in carbon pools
-!         TYPE(sMEND_CPOOL) CPOOLI_SIG(const_nISO - 1)   ![‰],isotopic signature in carbon pools
+         TYPE(sMEND_POOL) CPOOLI(const_nISO)           !isotopic carbon pools
+         TYPE(sMEND_POOL) CPOOLIFR(const_nISO)         !isotopic fraction in carbon pools
+         TYPE(sMEND_POOL) CPOOLI_SIG(const_nISO - 1)   ![‰],isotopic signature in carbon pools
      END TYPE sMEND_INP
 !-----------------------------------------------------------------------------!             
       TYPE sMEND_OUT
@@ -227,9 +228,9 @@ MODULE MOD_MEND_TYPE
          TYPE(sMEND_POOL)       NPOOL                   !organic N pools
          TYPE(sMEND_POOL)       CN                      !C:N Ratio in OM pools
          TYPE(sMEND_POOL_MN)    MNPOOL                  !mineral pools
-!         TYPE(sMEND_CPOOL) CPOOLI(const_nISO)           !isotopic carbon pools
-!         TYPE(sMEND_CPOOL) CPOOLIFR(const_nISO)         !isotopic fraction in carbon pools
-!         TYPE(sMEND_CPOOL) CPOOLI_SIG(const_nISO - 1)   ![‰],isotopic signature in carbon pools
+         TYPE(sMEND_POOL) CPOOLI(const_nISO)           !isotopic carbon pools
+         TYPE(sMEND_POOL) CPOOLIFR(const_nISO)         !isotopic fraction in carbon pools
+         TYPE(sMEND_POOL) CPOOLI_SIG(const_nISO - 1)   ![‰],isotopic signature in carbon pools
          TYPE(sMEND_FLUX)       CFLUX                   !CARBON FLUXES
          TYPE(sMEND_FLUX)       NFLUX                   !N FLUXES
          TYPE(sMEND_FLUX_MN)    MNFLUX                  !mineralization/immobilization fluxes

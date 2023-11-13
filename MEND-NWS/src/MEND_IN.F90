@@ -148,7 +148,7 @@ SUBROUTINE MENDIN(sPAR_SCE,sINI)
       
     !!VARIABLES NAMES FOR OUTPUT FILES: BEG
     DATA Name_POOL    /"TM","TOM","SOM","POM1","POM2","MOM","QOM","DOM","MB","MBA","MBD",&
-                    "ENZ","ENZP1","ENZP2","ENZM","TM_err"/
+                    "ENZ","ENZP1","ENZP2","ENZM","TM_err","CO2"/
     DATA Name_MNPOOL  /"CO2","Nmine","NH4","NO3"/
     DATA Name_FLUX    /"TOTout","TOTinp","POMinp1","POMinp2","DOMinp",&
                     "POMdec1","POMdec2","POMdec2DOM1","POMdec2DOM2","POMdec2MOM1","POMdec2MOM2",&
@@ -374,7 +374,9 @@ SUBROUTINE MENDIN(sPAR_SCE,sINI)
       write(sINI%iFout_VAR_hour,'(a10,200a20)')"Hour",(trim(Name_POOL(i))//"_C",i=1,const_nPOOL), &
                                                 (trim(Name_MNPOOL(i)),i=1,const_nPOOL_MN), &
                                                 (trim(Name_POOL(i))//"_N",i=1,const_nPOOL), &
-                                                (trim(Name_POOL(i))//"_CN",i=1,const_nPOOL)
+                                                (trim(Name_POOL(i))//"_CN",i=1,const_nPOOL),&
+												(trim(Name_POOL(i))//"_C12",i=1,const_nPOOL),&
+												(trim(Name_POOL(i))//"_Ciso",i=1,const_nPOOL)
 
       sfilename_full = trim(sINI%dirout)//"FLX_hour.out"
       open(unit = sINI%iFout_FLX_hour, file = sfilename_full, status = 'unknown')

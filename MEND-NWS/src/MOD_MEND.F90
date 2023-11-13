@@ -115,7 +115,7 @@ SUBROUTINE subMEND_INI(sINI)
 !    end do
 
 !
-    frISO(2) = const_Rstd(1)/(1d0 + const_Rstd(1)) !standard ratio of C14/C12 - 1e-12
+    frISO(2) = 0 !const_Rstd(1)/(1d0 + const_Rstd(1)) !standard ratio of C14/C12 - 1e-12
     frISO(1) = 1d0 - frISO(2) !e.g., C12 
 
 !
@@ -213,74 +213,69 @@ SUBROUTINE subMEND_INI(sINI)
     END IF !!IF(.not.sINI%Carbon_only)
 !!     END TYPE sMEND_INP
 
-!!ISOTOPE:
-!    do j = 1, const_nPOM
-!        sINP % CPOOLIFR % POM(j) = frISO
-!        sINP % CPOOLIFR % ENZP(j) = frISO
-!
-!        sINP % CPOOLI % POM(j) = sINP % CPOOLIFR % POM(j) * sINP % CPOOL % POM(j)
-!        sINP % CPOOLI % ENZP(j) = sINP % CPOOLIFR % ENZP(j) * sINP % CPOOL % ENZP(j)
-!
-!!!        sINP % CADDI % POMadd(j) = sINP % CADD % POMadd(j) * frISOadd
-!    end do
-!
-!!!    sINP % CADDI % DOMadd = sINP % CADD % DOMadd * frISOadd
-!
-!    sINP % CPOOLIFR % MOM = frISO
-!    sINP % CPOOLIFR % ENZM = frISO
-!    sINP % CPOOLIFR % QOM = frISO
-!    sINP % CPOOLIFR % DOM = frISO
-!    sINP % CPOOLIFR % MB = frISO
-!    sINP % CPOOLIFR % MBA = frISO
-!    sINP % CPOOLIFR % MBD = frISO
-!    sINP % CPOOLIFR % CO2 = frISO
+!ISOTOPE:
+   do j = 1, const_nPOM
+       sINP % CPOOLIFR % POM(j) = frISO
+       sINP % CPOOLIFR % ENZP(j) = frISO
 
-    !     print*, "C12 added = ",sINP%CADDI(1)
-    !     print*, "C14 added = ",sINP%CADDI(2) 
+       sINP % CPOOLI % POM(j) = sINP % CPOOLIFR % POM(j) * sINP % CPOOL % POM(j)
+       sINP % CPOOLI % ENZP(j) = sINP % CPOOLIFR % ENZP(j) * sINP % CPOOL % ENZP(j)
 
-!    sINP % CPOOLI % MOM = sINP % CPOOLIFR % MOM * sINP % CPOOL % MOM
-!    sINP % CPOOLI % ENZM = sINP % CPOOLIFR % ENZM * sINP % CPOOL % ENZM
-!    sINP % CPOOLI % QOM = sINP % CPOOLIFR % QOM * sINP % CPOOL % QOM
-!    sINP % CPOOLI % DOM = sINP % CPOOLIFR % DOM * sINP % CPOOL % DOM
-!    sINP % CPOOLI % MB = sINP % CPOOLIFR % MB * sINP % CPOOL % MB
-!    sINP % CPOOLI % MBA = sINP % CPOOLIFR % MBA * sINP % CPOOL % MBA
-!    sINP % CPOOLI % MBD = sINP % CPOOLIFR % MBD * sINP % CPOOL % MBD
-!    sINP % CPOOLI % CO2 = sINP % CPOOLIFR % CO2 * sINP % CPOOL % CO2
+!!        sINP % CADDI % POMadd(j) = sINP % CADD % POMadd(j) * frISOadd
+   end do
 
+!!    sINP % CADDI % DOMadd = sINP % CADD % DOMadd * frISOadd
 
-!    do j = 1, const_nISO
-!        sINP % CPOOLI(j) % SOM  = sum(sINP % CPOOLI(j) % POM) &
-!        &                       + sINP % CPOOLI(j) % MOM + sINP % CPOOLI(j) % QOM
-!    end do
-!    sINP % CPOOLIFR % SOM = sINP % CPOOLI % SOM/sINP % CPOOL % SOM
-!
-!    do j = 1, const_nISO - 1
-!        do k = 1, const_nPOM
-!            sINP % CPOOLI_SIG(j) % POM(k) = &
-!            & fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % POM(k), sINP % CPOOLI(j + 1) % POM(k))
-!            sINP % CPOOLI_SIG(j) % ENZP(k) = &
-!            & fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % ENZP(k), sINP % CPOOLI(j + 1) % ENZP(k))
-!        end do
-!
-!        sINP % CPOOLI_SIG(j) % MOM = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % MOM, sINP % CPOOLI(j + 1) % MOM)
-!        sINP % CPOOLI_SIG(j) % QOM = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % QOM, sINP % CPOOLI(j + 1) % QOM)
-!        sINP % CPOOLI_SIG(j) % MB = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % MB, sINP % CPOOLI(j + 1) % MB)
-!        sINP % CPOOLI_SIG(j) % MBA = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % MBA, sINP % CPOOLI(j + 1) % MBA)
-!        sINP % CPOOLI_SIG(j) % MBD = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % MBD, sINP % CPOOLI(j + 1) % MBD)
-!        sINP % CPOOLI_SIG(j) % DOM = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % DOM, sINP % CPOOLI(j + 1) % DOM)
-!        sINP % CPOOLI_SIG(j) % ENZM = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % ENZM, sINP % CPOOLI(j + 1) % ENZM)
-!        sINP % CPOOLI_SIG(j) % CO2 = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % CO2, sINP % CPOOLI(j + 1) % CO2)
-!        sINP % CPOOLI_SIG(j) % SOM = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % SOM, sINP % CPOOLI(j + 1) % SOM)
-!    end do !j = 1, const_nISO - 1
+   sINP % CPOOLIFR % MOM = frISO
+   sINP % CPOOLIFR % ENZM = frISO
+   sINP % CPOOLIFR % QOM = frISO
+   sINP % CPOOLIFR % DOM = frISO
+   sINP % CPOOLIFR % MB = frISO
+   sINP % CPOOLIFR % MBA = frISO
+   sINP % CPOOLIFR % MBD = frISO
+   sINP % CPOOLIFR % CO2 = frISO
+
+!        print*, "C12 added = ",sINP%CADDI(1)
+!        print*, "C14 added = ",sINP%CADDI(2) 
+
+   sINP % CPOOLI % MOM = sINP % CPOOLIFR % MOM * sINP % CPOOL % MOM
+   sINP % CPOOLI % ENZM = sINP % CPOOLIFR % ENZM * sINP % CPOOL % ENZM
+   sINP % CPOOLI % QOM = sINP % CPOOLIFR % QOM * sINP % CPOOL % QOM
+   sINP % CPOOLI % DOM = sINP % CPOOLIFR % DOM * sINP % CPOOL % DOM
+   sINP % CPOOLI % MB = sINP % CPOOLIFR % MB * sINP % CPOOL % MB
+   sINP % CPOOLI % MBA = sINP % CPOOLIFR % MBA * sINP % CPOOL % MBA
+   sINP % CPOOLI % MBD = sINP % CPOOLIFR % MBD * sINP % CPOOL % MBD
+   sINP % CPOOLI % CO2 = sINP % CPOOLIFR % CO2 * sINP % CPOOL % CO2
+
+   do j = 1, const_nISO
+       sINP % CPOOLI(j) % SOM  = sum(sINP % CPOOLI(j) % POM) &
+       &                       + sINP % CPOOLI(j) % MOM + sINP % CPOOLI(j) % QOM
+   end do
+   sINP % CPOOLIFR % SOM = sINP % CPOOLI % SOM/sINP % CPOOL % SOM
+   do j = 1, const_nISO - 1
+       do k = 1, const_nPOM
+           sINP % CPOOLI_SIG(j) % POM(k) = &
+           & fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % POM(k), sINP % CPOOLI(j + 1) % POM(k))
+           sINP % CPOOLI_SIG(j) % ENZP(k) = &
+           & fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % ENZP(k), sINP % CPOOLI(j + 1) % ENZP(k))
+       end do
+       sINP % CPOOLI_SIG(j) % MOM = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % MOM, sINP % CPOOLI(j + 1) % MOM)
+       sINP % CPOOLI_SIG(j) % QOM = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % QOM, sINP % CPOOLI(j + 1) % QOM)
+       sINP % CPOOLI_SIG(j) % MB = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % MB, sINP % CPOOLI(j + 1) % MB)
+       sINP % CPOOLI_SIG(j) % MBA = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % MBA, sINP % CPOOLI(j + 1) % MBA)
+       sINP % CPOOLI_SIG(j) % MBD = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % MBD, sINP % CPOOLI(j + 1) % MBD)
+       sINP % CPOOLI_SIG(j) % DOM = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % DOM, sINP % CPOOLI(j + 1) % DOM)
+       sINP % CPOOLI_SIG(j) % ENZM = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % ENZM, sINP % CPOOLI(j + 1) % ENZM)
+       !sINP % CPOOLI_SIG(j) % CO2 = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % CO2, sINP % CPOOLI(j + 1) % CO2)
+       sINP % CPOOLI_SIG(j) % SOM = fPermil(0, const_Rstd(j), sINP % CPOOLI(1) % SOM, sINP % CPOOLI(j + 1) % SOM)
+   end do !j = 1, const_nISO - 1
 
     if (sINI % iModel .eq. 0) then !output results for model simulation
 !        write(sINI%iFout_VAR_hour, '(i10,13e20.3,13e20.3,13e20.3)') &
 !                    0, sINP % CPOOL,sINP % CPOOLI(1),sINP % CPOOLI(2)
         write(sINI%iFout_VAR_hour, '(i10,100e20.3)') &
-                    0, sINP % CPOOL, sINP%MNPOOL, sINP%NPOOL, sINP%CN !!,sINP % CPOOLI(1),sINP % CPOOLI(2)
+                    0, sINP % CPOOL, sINP%MNPOOL, sINP%NPOOL, sINP%CN ,sINP % CPOOLI(1),sINP % CPOOLI(2)
     end if
-
-
     sINI % sINP = sINP
 !    DEALLOCATE(dINI)
 END !!subroutine subMEND_INI
@@ -490,7 +485,7 @@ SUBROUTINE subMEND_output(sDate,ihr, sPAR, sINI, sOUT)
 !    write(sINI%iFout_VAR_hour, '(A10,13e20.3,13e20.3,13e20.3)') &
 !        sDateHr, sOUT % CPOOL,sOUT % CPOOLI(1),sOUT % CPOOLI(2)
     write(sINI%iFout_VAR_hour, '(A10,200e20.6)') &
-        sDateHr, sOUT % CPOOL, sOUT%MNPOOL, sOUT%NPOOL, sOUT%CN !!,sOUT % CPOOLI(1),sOUT % CPOOLI(2)
+        sDateHr, sOUT % CPOOL, sOUT%MNPOOL, sOUT%NPOOL, sOUT%CN ,sOUT % CPOOLI(1),sOUT % CPOOLI(2)
     write(sINI%iFout_FLX_hour, '(A10,200e20.6)') sDateHr, sOUT % CFLUX, sOUT%MNFLUX, sOUT%NFLUX
     write(sINI%iFout_PAR_hour, '(A10,100e20.6)') sDateHr, sPAR
 !    end if
@@ -635,8 +630,8 @@ SUBROUTINE subMEND_RUN(xx, sPAR, sINI, sOUT)
 !     
 !    CALL subMEND_INI(sINI) !initialization: initial pool sizes
     
-    frISOadd(2) = 1d0/(1d0 + sINI%SIN_C12_C14) !C14
-    frISOadd(1) = 1d0 - frISOadd(2)            !C12
+    frISOadd(2) = 1d0- sINI%SIN_C12_C14 !C14
+    frISOadd(1) = sINI%SIN_C12_C14           !C12
     
     sINP = sINI%sINP
 
@@ -651,8 +646,8 @@ SUBROUTINE subMEND_RUN(xx, sPAR, sINI, sOUT)
     sOUT % NPOOL    = sINP % NPOOL
     sOUT % MNPOOL   = sINP % MNPOOL
     sOUT % CN       = sINP % CN
-!    sOUT % CPOOLI   = sINP % CPOOLI
-!    sOUT % CPOOLIFR = sINP % CPOOLIFR
+    sOUT % CPOOLI   = sINP % CPOOLI
+    sOUT % CPOOLIFR = sINP % CPOOLIFR
     
     !    nHour = sINI % nHour
     nHour = sINI % nHour_sim
@@ -683,6 +678,8 @@ SUBROUTINE subMEND_RUN(xx, sPAR, sINI, sOUT)
             sINP % NPOOL    = sOUT % NPOOL
             sINP % MNPOOL   = sOUT % MNPOOL
             sINP % CN       = sOUT % CN
+            SINP % CPOOLI   = sOUT % CPOOLI
+            sINP % CPOOLIFR = sOUT % CPOOLIFR
             if(isnan(sOUT%CN%MBA)) then
                 write(*,*)"iday; hour=", iday, lp, sOUT%CPOOL%MBA, sOUT%NPOOL%MBA, sOUT%CPOOL%DOM, sOUT%NPOOL%DOM
                 write(*,"(A10,100E10.2)")"CFLUX=",sOUT%CFLUX
@@ -713,13 +710,28 @@ SUBROUTINE subMEND_RUN(xx, sPAR, sINI, sOUT)
                 sOUT % CFLUX % POMadd(1) = sINP%SIN * sINI%SIN_frac(1) + sINI%SIN_other(1,1)  !![mg POM/g soil/h], inputs to POM
                 sOUT % CFLUX % POMadd(2) = sINP%SIN * sINI%SIN_frac(2) + sINI%SIN_other(1,2)
                 sOUT % CFLUX % DOMadd    = sINP%SIN * sINI%SIN_frac(3) + sINI%SIN_other(1,3)  !![mg DOM/g soil/h], inputs to DOM
-
+                sINP%CADD%POMadd(1)=sOUT % CFLUX % POMadd(1)
+				sINP%CADD%POMadd(2)=sOUT % CFLUX % POMadd(2)
+				sINP % CADD % DOMadd=sOUT % CFLUX % DOMadd
+				
                 if(i.ge.jbeg.and.i.le.jend) then
                     sOUT%CFLUX%POMadd(1) = sOUT%CFLUX%POMadd(1)+sINI%SIN_other(2,1)/DBLE(jend-jbeg+1)
                     sOUT%CFLUX%POMadd(2) = sOUT%CFLUX%POMadd(2)+sINI%SIN_other(2,2)/DBLE(jend-jbeg+1)
                     sOUT%CFLUX%DOMadd    = sOUT%CFLUX%DOMadd   +sINI%SIN_other(2,3)/DBLE(jend-jbeg+1)
                 end if
         !        write(*,*)i,sINP % CADD % POMadd(1:2),sINP % CADD % DOMadd
+				IF(k.GE.0) THEN
+					do j = 1, const_nPOM
+						sINP % CADDI % POMadd(j) = sINP%CADD%POMadd(j)*sINI%SIN_C12_C14
+					end do
+					sINP % CADDI % DOMadd = sINP%CADD%DOMadd*sINI%SIN_C12_C14
+				else
+					do j = 1, const_nPOM
+						sINP % CADDI % POMadd(j) = sINP%CADD%POMadd(j)*0
+					end do
+					sINP % CADDI % DOMadd = sINP%CADD%DOMadd*0				
+				END IF
+            !!External INPUT: END
                 
                 IF(.NOT.sINI%Carbon_only) THEN
                     sOUT % NFLUX % POMadd(1) = sINP%SIN * sINI%SIN_frac(1)/sINI%CN_LITT(1) + sINI%SIN_other(1,1)/sINI%CN_WOOD(1)  !![mg POM/g soil/h], inputs to POM
@@ -827,11 +839,11 @@ SUBROUTINE subMEND_RUN(xx, sPAR, sINI, sOUT)
                     sOUT%MNFLUX%NO3_dep = sINI%SIN_NO3(j)   !!TODO
                 END IF
             end if
-
-!            do j = 1, const_nPOM
-!                sINP % CADDI % POMadd(j) = sINP%CADD%POMadd(j)*frISOadd
-!            end do
-!            sINP % CADDI % DOMadd = sINP%CADD%DOMadd*frISOadd
+             
+            !do j = 1, const_nPOM
+                !sINP % CADDI % POMadd(j) = sINP%CADD%POMadd(j)*sINI%SIN_C12_C14
+            !end do
+            !sINP % CADDI % DOMadd = sINP%CADD%DOMadd*sINI%SIN_C12_C14
             !!External INPUT: END
 
             sINI%sINP = sINP
@@ -1158,7 +1170,8 @@ SUBROUTINE subMEND(xx, sPAR, sINI, sOUT)
     !!C MASS BALANCE CHECK
     sOUT%CFLUX%TOTout = sOUT%MNFLUX%CO2_gmo
     sOUT%CPOOL%TM_err = (sOUT%CPOOL%TM - sINP%CPOOL%TM) - (sOUT%CFLUX%TOTinp - sOUT%CFLUX%TOTout)
-    
+    sOUT%CPOOL%CO2=sOUT % MNPOOL % CO2 ! added for isotope analysis
+	
 !    if(isnan(sOUT % CPOOL%MBA)) then
 !        write(*,'(a15,50d10.3)')"sOUT%CPOOL=",sOUT%CPOOL
 !        write(*,'(a15,50d10.3)')"sOUT%CFLUX=",sOUT%CFLUX
@@ -1376,115 +1389,115 @@ SUBROUTINE subMEND(xx, sPAR, sINI, sOUT)
     !!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
     
-!    do j = 2, const_nISO !j = 1 for lightest isotope, e.g., C12
-!        !Isotopic components
-!
-!        sOUT % CPOOLI(j) % POM      = sINP % CPOOLI(j) % POM + sINP % CADDI(j) % POMadd &
-!        &                           - sOUT % CFLUX % POMdec * sINP % CPOOLIFR(j) % POM !Lignin and Cellulose                             
-!        sOUT % CPOOLI(j) % POM(1)   = sOUT % CPOOLI(j) % POM(1) & 
-!        &                           + sOUT % CFLUX % MB_to_POM * sINP % CPOOLIFR(j) % MBA !ONLY Lignin!    
-!        sOUT % CPOOLI(j) % MOM      = sINP % CPOOLI(j) % MOM &
-!        &                           + sum(sOUT % CFLUX % POMdec_to_MOM * sINP % CPOOLIFR(j) % POM) &
-!        &                           - sOUT % CFLUX % MOM_to_DOM * sINP % CPOOLIFR(j) % MOM
-!        sOUT % CPOOLI(j) % QOM      = sINP % CPOOLI(j) % QOM &
-!        &                           + sOUT % CFLUX % DOM_to_QOM * sINP % CPOOLIFR(j) % DOM &
-!        &                           - sOUT % CFLUX % QOM_to_DOM * sINP % CPOOLIFR(j) % QOM!QOM mass balance
-!        sOUT % CPOOLI(j) % MB      = sINP % CPOOLI(j) % MB &
-!        &                           + sOUT % CFLUX % DOM_to_MB * sINP % CPOOLIFR(j) % DOM &
-!        &                           - (sOUT % CFLUX % CO2_growth + sOUT % CFLUX % CO2_maintn + sOUT % CFLUX % MB_PM) &
-!        &                           * sINP % CPOOLIFR(j) % MBA &
-!        &                           - sOUT % CFLUX % CO2_maintn_dorm * sINP % CPOOLIFR(j) % MBD
-!        sOUT % CPOOLI(j) % MBA     = sINP % CPOOLI(j) % MBA &
-!        &                           + sOUT % CFLUX % DOM_to_MB * sINP % CPOOLIFR(j) % DOM &
-!        &                           - (sOUT % CFLUX % CO2_growth + sOUT % CFLUX % CO2_maintn + sOUT % CFLUX % MB_PM) &
-!        &                           * sINP % CPOOLIFR(j) % MBA &
-!        &                           - sOUT % CFLUX % MBA_to_MBD * sINP % CPOOLIFR(j) % MBA &
-!        &                           + sOUT % CFLUX % MBD_to_MBA * sINP % CPOOLIFR(j) % MBD
-!        sOUT % CPOOLI(j) % MBD     = sINP % CPOOLI(j) % MBD &
-!        &                           - sOUT % CFLUX % CO2_maintn_dorm * sINP % CPOOLIFR(j) % MBD &
-!        &                           + sOUT % CFLUX % MBA_to_MBD * sINP % CPOOLIFR(j) % MBA &
-!        &                           - sOUT % CFLUX % MBD_to_MBA * sINP % CPOOLIFR(j) % MBD
-!        sOUT % CPOOLI(j) % DOM      = sINP % CPOOLI(j) % DOM + sINP % CADDI(j) % DOMadd &
-!        &                           + sum(sOUT % CFLUX % POMdec_to_DOM * sINP % CPOOLIFR(j) % POM) &
-!        &                           + sOUT % CFLUX % MB_to_DOM * sINP % CPOOLIFR(j) % MBA &
-!        &                           + sOUT % CFLUX % MOM_to_DOM * sINP % CPOOLIFR(j) % MOM &
-!        &                           + sum(sOUT % CFLUX % ENZP_to_DOM * sINP % CPOOLIFR(j) % ENZP) &
-!        &                           + sOUT % CFLUX % ENZM_to_DOM * sINP % CPOOLIFR(j) % ENZM &
-!        &                           - sOUT % CFLUX % DOM_to_MB * sINP % CPOOLIFR(j) % DOM &
-!        &                           - sOUT % CFLUX % DOM_to_QOM * sINP % CPOOLIFR(j) % DOM &
-!        &                           + sOUT % CFLUX % QOM_to_DOM * sINP % CPOOLIFR(j) % QOM
-!        sOUT % CPOOLI(j) % ENZP     = sINP % CPOOLI(j) % ENZP &
-!        &                           + sOUT % CFLUX % MB_to_ENZP * sINP % CPOOLIFR(j) % MBA &
-!        &                           - sOUT % CFLUX % ENZP_to_DOM * sINP % CPOOLIFR(j) % ENZP
-!        sOUT % CPOOLI(j) % ENZM     = sINP % CPOOLI(j) % ENZM &
-!        &                           + sOUT % CFLUX % MB_to_ENZM * sINP % CPOOLIFR(j) % MBA &
-!        &                           - sOUT % CFLUX % ENZM_to_DOM * sINP % CPOOLIFR(j) % ENZM
-!        sOUT % CPOOLI(j) % CO2      = sINP % CPOOLI(j) % CO2 &
-!                                    + (sOUT % CFLUX % CO2_growth + sOUT % CFLUX % CO2_maintn) * sINP % CPOOLIFR(j) % MBA &
-!        &                           + sOUT % CFLUX % CO2_maintn_dorm * sINP % CPOOLIFR(j) % MBD
-!
-!        !!CO2_C14 or C13 flux
-!        sOUT%CO2_gm_iso             = (sOUT % CFLUX % CO2_growth + sOUT % CFLUX % CO2_maintn) * sINP%CPOOLIFR(2)%MBA &
-!        &                           + sOUT % CFLUX % CO2_maintn_dorm * sINP%CPOOLIFR(2)%MBD
-!        
-!        sOUT % CPOOLI(j) % SOM      = sum(sOUT % CPOOLI(j) % POM) &
-!        &                           + sOUT % CPOOLI(j) % MOM + sOUT % CPOOLI(j) % QOM
-!
-!    end do !j = 1, const_nISO
-!
-!    !j = 1, compute the lightest isotope
-!    DO i = 1, const_nPOM
-!        sOUT % CPOOLI(1) % POM(i) = sOUT % CPOOL % POM(i) - sum(sOUT % CPOOLI(2:const_nISO) % POM(i)) !Lignin and Cellulose
-!        sOUT % CPOOLI(1) % ENZP(i) = sOUT % CPOOL % ENZP(i) - sum(sOUT % CPOOLI(2:const_nISO) % ENZP(i))
-!    END DO
-!    sOUT % CPOOLI(1) % MOM = sOUT % CPOOL % MOM - sum(sOUT % CPOOLI(2:const_nISO) % MOM)
-!    sOUT % CPOOLI(1) % QOM = sOUT % CPOOL % QOM - sum(sOUT % CPOOLI(2:const_nISO) % QOM)
-!    sOUT % CPOOLI(1) % MB = sOUT % CPOOL % MB - sum(sOUT % CPOOLI(2:const_nISO) % MB)
-!    sOUT % CPOOLI(1) % MBA = sOUT % CPOOL % MBA - sum(sOUT % CPOOLI(2:const_nISO) % MBA)
-!    sOUT % CPOOLI(1) % MBD = sOUT % CPOOL % MBD - sum(sOUT % CPOOLI(2:const_nISO) % MBD)
-!    sOUT % CPOOLI(1) % DOM = sOUT % CPOOL % DOM - sum(sOUT % CPOOLI(2:const_nISO) % DOM)
-!    sOUT % CPOOLI(1) % ENZM = sOUT % CPOOL % ENZM - sum(sOUT % CPOOLI(2:const_nISO) % ENZM)
-!    sOUT % CPOOLI(1) % CO2 = sOUT % CPOOL % CO2 - sum(sOUT % CPOOLI(2:const_nISO) % CO2)
-!    sOUT % CPOOLI(1) % SOM = sOUT % CPOOL % SOM - sum(sOUT % CPOOLI(2:const_nISO) % SOM)
-!
-!    do j = 1, const_nISO
-!        !Isotopic fractions
-!        sOUT % CPOOLIFR(j) % POM = sOUT % CPOOLI(j) % POM/sOUT % CPOOL % POM
-!        sOUT % CPOOLIFR(j) % MOM = sOUT % CPOOLI(j) % MOM/sOUT % CPOOL % MOM
-!        sOUT % CPOOLIFR(j) % QOM = sOUT % CPOOLI(j) % QOM/sOUT % CPOOL % QOM
-!        sOUT % CPOOLIFR(j) % MB = sOUT % CPOOLI(j) % MB/sOUT % CPOOL % MB
-!        sOUT % CPOOLIFR(j) % MBA = sOUT % CPOOLI(j) % MBA/sOUT % CPOOL % MBA
-!        sOUT % CPOOLIFR(j) % MBD = sOUT % CPOOLI(j) % MBA/sOUT % CPOOL % MBD
-!        sOUT % CPOOLIFR(j) % DOM = sOUT % CPOOLI(j) % DOM/sOUT % CPOOL % DOM
-!        sOUT % CPOOLIFR(j) % ENZP = sOUT % CPOOLI(j) % ENZP/sOUT % CPOOL % ENZP
-!        sOUT % CPOOLIFR(j) % ENZM = sOUT % CPOOLI(j) % ENZM/sOUT % CPOOL % ENZM
-!        sOUT % CPOOLIFR(j) % CO2 = sOUT % CPOOLI(j) % CO2/sOUT % CPOOL % CO2
-!        sOUT % CPOOLIFR(j) % SOM = sOUT % CPOOLI(j) % SOM/sOUT % CPOOL % SOM
-!
-!    end do !j = 1, const_nISO        
-!
-!    !    print*, sum(sOUT%CPOOLIFR%MB)!sum(sOUT%CPOOLI(2:const_nISO)%MB),sOUT%CPOOLI(1:const_nISO)%MB
-!
-!    !Convert Isotope Concentration to Signatures [Permil]
-!    do j = 1, const_nISO - 1
-!
-!        do k = 1, const_nPOM
-!            sOUT % CPOOLI_SIG(j) % POM(k) = &
-!            & fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % POM(k), sOUT % CPOOLI(j + 1) % POM(k))
-!            sOUT % CPOOLI_SIG(j) % ENZP(k) = &
-!            & fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % ENZP(k), sOUT % CPOOLI(j + 1) % ENZP(k))
-!        end do
-!
-!        sOUT % CPOOLI_SIG(j) % MOM = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % MOM, sOUT % CPOOLI(j + 1) % MOM)
-!        sOUT % CPOOLI_SIG(j) % QOM = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % QOM, sOUT % CPOOLI(j + 1) % QOM)
-!        sOUT % CPOOLI_SIG(j) % MB = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % MB, sOUT % CPOOLI(j + 1) % MB)
-!        sOUT % CPOOLI_SIG(j) % MBA = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % MBA, sOUT % CPOOLI(j + 1) % MBA)
-!        sOUT % CPOOLI_SIG(j) % MBD = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % MBD, sOUT % CPOOLI(j + 1) % MBD)
-!        sOUT % CPOOLI_SIG(j) % DOM = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % DOM, sOUT % CPOOLI(j + 1) % DOM)
-!        sOUT % CPOOLI_SIG(j) % ENZM = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % ENZM, sOUT % CPOOLI(j + 1) % ENZM)
-!        sOUT % CPOOLI_SIG(j) % CO2 = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % CO2, sOUT % CPOOLI(j + 1) % CO2)
-!        sOUT % CPOOLI_SIG(j) % SOM = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % SOM, sOUT % CPOOLI(j + 1) % SOM)
-!    end do !j = 1, const_nISO - 1
+   do j = 2, const_nISO !j = 1 for lightest isotope, e.g., C12
+       !Isotopic components
+
+       sOUT % CPOOLI(j) % POM      = sINP % CPOOLI(j) % POM + sINP % CADDI(j) % POMadd &
+       &                           - sOUT % CFLUX % POMdec * sINP % CPOOLIFR(j) % POM !Lignin and Cellulose                             
+       sOUT % CPOOLI(j) % POM(1)   = sOUT % CPOOLI(j) % POM(1) & 
+       &                           + sOUT % CFLUX % MBA_to_POM * sINP % CPOOLIFR(j) % MBA !ONLY Lignin!    
+       sOUT % CPOOLI(j) % MOM      = sINP % CPOOLI(j) % MOM &
+       &                           + sum(sOUT % CFLUX % POMdec_to_MOM * sINP % CPOOLIFR(j) % POM) &
+       &                           - sOUT % CFLUX % MOM_to_DOM * sINP % CPOOLIFR(j) % MOM
+       sOUT % CPOOLI(j) % QOM      = sINP % CPOOLI(j) % QOM &
+       &                           + sOUT % CFLUX % DOM_to_QOM * sINP % CPOOLIFR(j) % DOM &
+       &                           - sOUT % CFLUX % QOM_to_DOM * sINP % CPOOLIFR(j) % QOM!QOM mass balance
+       sOUT % CPOOLI(j) % MB      = sINP % CPOOLI(j) % MB &
+       &                           + sOUT % CFLUX % DOM_to_MBA * sINP % CPOOLIFR(j) % DOM &
+       &                           - (sOUT % MNFLUX % CO2_growth + sOUT % MNFLUX % CO2_maintn_MBA + sOUT % CFLUX % MBA_PM) &
+       &                           * sINP % CPOOLIFR(j) % MBA &
+       &                           - sOUT % MNFLUX % CO2_maintn_MBD * sINP % CPOOLIFR(j) % MBD
+       sOUT % CPOOLI(j) % MBA     = sINP % CPOOLI(j) % MBA &
+       &                           + sOUT % CFLUX % DOM_to_MBA * sINP % CPOOLIFR(j) % DOM &
+       &                           - (sOUT % MNFLUX % CO2_growth + sOUT % MNFLUX % CO2_maintn_MBA + sOUT % CFLUX % MBA_PM) &
+       &                           * sINP % CPOOLIFR(j) % MBA &
+       &                           - sOUT % CFLUX % MBA_to_MBD * sINP % CPOOLIFR(j) % MBA &
+       &                           + sOUT % CFLUX % MBD_to_MBA * sINP % CPOOLIFR(j) % MBD
+       sOUT % CPOOLI(j) % MBD     = sINP % CPOOLI(j) % MBD &
+       &                           - sOUT % MNFLUX % CO2_maintn_MBD * sINP % CPOOLIFR(j) % MBD &
+       &                           + sOUT % CFLUX % MBA_to_MBD * sINP % CPOOLIFR(j) % MBA &
+       &                           - sOUT % CFLUX % MBD_to_MBA * sINP % CPOOLIFR(j) % MBD
+       sOUT % CPOOLI(j) % DOM      = sINP % CPOOLI(j) % DOM + sINP % CADDI(j) % DOMadd &
+       &                           + sum(sOUT % CFLUX % POMdec_to_DOM * sINP % CPOOLIFR(j) % POM) &
+       &                           + sOUT % CFLUX % MBA_to_DOM * sINP % CPOOLIFR(j) % MBA &
+       &                           + sOUT % CFLUX % MOM_to_DOM * sINP % CPOOLIFR(j) % MOM &
+       &                           + sum(sOUT % CFLUX % ENZP_to_DOM * sINP % CPOOLIFR(j) % ENZP) &
+       &                           + sOUT % CFLUX % ENZM_to_DOM * sINP % CPOOLIFR(j) % ENZM &
+       &                           - sOUT % CFLUX % DOM_to_MBA * sINP % CPOOLIFR(j) % DOM &
+       &                           - sOUT % CFLUX % DOM_to_QOM * sINP % CPOOLIFR(j) % DOM &
+       &                           + sOUT % CFLUX % QOM_to_DOM * sINP % CPOOLIFR(j) % QOM
+       sOUT % CPOOLI(j) % ENZP     = sINP % CPOOLI(j) % ENZP &
+       &                           + sOUT % CFLUX % MBA_to_ENZP * sINP % CPOOLIFR(j) % MBA &
+       &                           - sOUT % CFLUX % ENZP_to_DOM * sINP % CPOOLIFR(j) % ENZP
+       sOUT % CPOOLI(j) % ENZM     = sINP % CPOOLI(j) % ENZM &
+       &                           + sOUT % CFLUX % MBA_to_ENZM * sINP % CPOOLIFR(j) % MBA &
+       &                           - sOUT % CFLUX % ENZM_to_DOM * sINP % CPOOLIFR(j) % ENZM
+       sOUT % CPOOLI(j) % CO2      = sINP % CPOOLI(j) % CO2 &
+                                   + (sOUT % MNFLUX % CO2_growth + sOUT % MNFLUX % CO2_maintn_MBA) * sINP % CPOOLIFR(j) % MBA &
+       &                           + sOUT % MNFLUX % CO2_maintn_MBD * sINP % CPOOLIFR(j) % MBD
+
+       !!CO2_C14 or C13 flux
+       sOUT%CO2_gm_iso             = (sOUT % MNFLUX % CO2_growth + sOUT % MNFLUX % CO2_maintn_MBA) * sINP%CPOOLIFR(2)%MBA &
+       &                           + sOUT % MNFLUX % CO2_maintn_MBD * sINP%CPOOLIFR(2)%MBD
+       
+       sOUT % CPOOLI(j) % SOM      = sum(sOUT % CPOOLI(j) % POM) &
+       &                           + sOUT % CPOOLI(j) % MOM + sOUT % CPOOLI(j) % QOM
+
+   end do !j = 1, const_nISO
+
+   !j = 1, compute the lightest isotope
+   DO i = 1, const_nPOM
+       sOUT % CPOOLI(1) % POM(i) = sOUT % CPOOL % POM(i) - sum(sOUT % CPOOLI(2:const_nISO) % POM(i)) !Lignin and Cellulose
+       sOUT % CPOOLI(1) % ENZP(i) = sOUT % CPOOL % ENZP(i) - sum(sOUT % CPOOLI(2:const_nISO) % ENZP(i))
+   END DO
+   sOUT % CPOOLI(1) % MOM = sOUT % CPOOL % MOM - sum(sOUT % CPOOLI(2:const_nISO) % MOM)
+   sOUT % CPOOLI(1) % QOM = sOUT % CPOOL % QOM - sum(sOUT % CPOOLI(2:const_nISO) % QOM)
+   sOUT % CPOOLI(1) % MB = sOUT % CPOOL % MB - sum(sOUT % CPOOLI(2:const_nISO) % MB)
+   sOUT % CPOOLI(1) % MBA = sOUT % CPOOL % MBA - sum(sOUT % CPOOLI(2:const_nISO) % MBA)
+   sOUT % CPOOLI(1) % MBD = sOUT % CPOOL % MBD - sum(sOUT % CPOOLI(2:const_nISO) % MBD)
+   sOUT % CPOOLI(1) % DOM = sOUT % CPOOL % DOM - sum(sOUT % CPOOLI(2:const_nISO) % DOM)
+   sOUT % CPOOLI(1) % ENZM = sOUT % CPOOL % ENZM - sum(sOUT % CPOOLI(2:const_nISO) % ENZM)
+   sOUT % CPOOLI(1) % CO2 = sOUT % CPOOL % CO2 - sum(sOUT % CPOOLI(2:const_nISO) % CO2)
+   sOUT % CPOOLI(1) % SOM = sOUT % CPOOL % SOM - sum(sOUT % CPOOLI(2:const_nISO) % SOM)
+
+   do j = 1, const_nISO
+       !Isotopic fractions
+       sOUT % CPOOLIFR(j) % POM = sOUT % CPOOLI(j) % POM/sOUT % CPOOL % POM
+       sOUT % CPOOLIFR(j) % MOM = sOUT % CPOOLI(j) % MOM/sOUT % CPOOL % MOM
+       sOUT % CPOOLIFR(j) % QOM = sOUT % CPOOLI(j) % QOM/sOUT % CPOOL % QOM
+       sOUT % CPOOLIFR(j) % MB = sOUT % CPOOLI(j) % MB/sOUT % CPOOL % MB
+       sOUT % CPOOLIFR(j) % MBA = sOUT % CPOOLI(j) % MBA/sOUT % CPOOL % MBA
+       sOUT % CPOOLIFR(j) % MBD = sOUT % CPOOLI(j) % MBD/sOUT % CPOOL % MBD
+       sOUT % CPOOLIFR(j) % DOM = sOUT % CPOOLI(j) % DOM/sOUT % CPOOL % DOM
+       sOUT % CPOOLIFR(j) % ENZP = sOUT % CPOOLI(j) % ENZP/sOUT % CPOOL % ENZP
+       sOUT % CPOOLIFR(j) % ENZM = sOUT % CPOOLI(j) % ENZM/sOUT % CPOOL % ENZM
+       sOUT % CPOOLIFR(j) % CO2 = sOUT % CPOOLI(j) % CO2/sOUT % CPOOL % CO2
+       sOUT % CPOOLIFR(j) % SOM = sOUT % CPOOLI(j) % SOM/sOUT % CPOOL % SOM
+
+   end do !j = 1, const_nISO        
+
+   !    print*, sum(sOUT%CPOOLIFR%MB)!sum(sOUT%CPOOLI(2:const_nISO)%MB),sOUT%CPOOLI(1:const_nISO)%MB
+
+   !Convert Isotope Concentration to Signatures [Permil]
+   do j = 1, const_nISO - 1
+
+       do k = 1, const_nPOM
+           sOUT % CPOOLI_SIG(j) % POM(k) = &
+           & fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % POM(k), sOUT % CPOOLI(j + 1) % POM(k))
+           sOUT % CPOOLI_SIG(j) % ENZP(k) = &
+           & fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % ENZP(k), sOUT % CPOOLI(j + 1) % ENZP(k))
+       end do
+
+       sOUT % CPOOLI_SIG(j) % MOM = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % MOM, sOUT % CPOOLI(j + 1) % MOM)
+       sOUT % CPOOLI_SIG(j) % QOM = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % QOM, sOUT % CPOOLI(j + 1) % QOM)
+       sOUT % CPOOLI_SIG(j) % MB = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % MB, sOUT % CPOOLI(j + 1) % MB)
+       sOUT % CPOOLI_SIG(j) % MBA = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % MBA, sOUT % CPOOLI(j + 1) % MBA)
+       sOUT % CPOOLI_SIG(j) % MBD = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % MBD, sOUT % CPOOLI(j + 1) % MBD)
+       sOUT % CPOOLI_SIG(j) % DOM = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % DOM, sOUT % CPOOLI(j + 1) % DOM)
+       sOUT % CPOOLI_SIG(j) % ENZM = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % ENZM, sOUT % CPOOLI(j + 1) % ENZM)
+       sOUT % CPOOLI_SIG(j) % CO2 = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % CO2, sOUT % CPOOLI(j + 1) % CO2)
+       sOUT % CPOOLI_SIG(j) % SOM = fPermil(0, const_Rstd(j), sOUT % CPOOLI(1) % SOM, sOUT % CPOOLI(j + 1) % SOM)
+   end do !j = 1, const_nISO - 1
 
     
 !    END ASSOMIATE
@@ -3031,19 +3044,19 @@ SUBROUTINE sOUT_tscale(dirout,sDate_beg,sDate_end)
     sFile_inp = trim(dirout)//"VAR_hour.out"   
     sFile_out = trim(dirout)//"VAR_day.out"
 !    nRow_skip=3; nVAR=const_nPOOL*(const_nISO+1); tstep=1; flag_avg=1
-    nRow_skip=3; nVAR=const_nPOOL*3 + const_nPOOL_MN; tstep=1; flag_avg=1
+    nRow_skip=3; nVAR=const_nPOOL*5 + const_nPOOL_MN; tstep=1; flag_avg=1
     CALL sOUT_ALL_tscale(sFile_inp,sFile_out,nRow_skip,nVAR, sDate_beg, sDate_end,tstep,flag_avg)
     CALL system('gzip -f '//sFile_inp)
     
     sFile_inp = trim(dirout)//"VAR_day.out" 
     sFile_out = trim(dirout)//"VAR_mon.out"
 !    nRow_skip=3; nVAR=const_nVARc*(const_nISO+1); tstep=2; flag_avg=1
-    nRow_skip=3; nVAR=const_nPOOL*3 + const_nPOOL_MN; tstep=2; flag_avg=1
+    nRow_skip=3; nVAR=const_nPOOL*5 + const_nPOOL_MN; tstep=2; flag_avg=1
     CALL sOUT_ALL_tscale(sFile_inp,sFile_out,nRow_skip,nVAR, sDate_beg, sDate_end,tstep,flag_avg)
     
     sFile_inp = trim(dirout)//"VAR_day.out"   
     sFile_out = trim(dirout)//"VAR_year.out"
-    nRow_skip=3; nVAR=const_nPOOL*3 + const_nPOOL_MN; tstep=4; flag_avg=1
+    nRow_skip=3; nVAR=const_nPOOL*5 + const_nPOOL_MN; tstep=4; flag_avg=1
     CALL sOUT_ALL_tscale(sFile_inp,sFile_out,nRow_skip,nVAR, sDate_beg, sDate_end,tstep,flag_avg)
     
     print*,">>>[2] FLUXes:"
