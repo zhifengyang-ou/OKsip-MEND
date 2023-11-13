@@ -88,8 +88,8 @@
     ssDate_beg_inp2 = '20090801'
     ssDate_end_inp2 = '20111031'
 
-!!SIN_C12_C14 [ratio of C12 to C14 in SOC input];   
-    sSIN_C12_C14 = 2.0d5
+!!SIN_C12_C14 [ratio of C12 to C14 in SOC input changed to C13 concentration of GPP for OKSIP paper];   
+    sSIN_C12_C14 = 0.0
 !!SIN_Multiplier [multiplier for litter input during post-data period simulation]
     sSIN_Multiplier = 1.0
 
