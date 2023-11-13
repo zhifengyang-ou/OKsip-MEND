@@ -608,7 +608,7 @@ SUBROUTINE subMEND_RUN(xx, sPAR, sINI, sOUT)
     REAL(8) SpH_mean(const_nHourInYear)
     
     
-    nday = nDaysbwDates(sINI%sDate_end_all,sINI%sDate_end_sim)
+    nday = nDaysbwDates(sINI%sDate_end_all,sINI%sDate_end_sim)-1
     if(nday.gt.0) then
         !!projection period beyond observation period (sINI%sDate_end_all)
         !!only used for sINI%iScenario == 1, i.e., 1-yr mean hourly data to drive projection run

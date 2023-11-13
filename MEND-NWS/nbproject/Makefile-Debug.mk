@@ -17,12 +17,12 @@ RANLIB=ranlib
 CC=gcc
 CCC=g++
 CXX=g++
-FC=/usr//bin/gfortran
+FC=C:\cygwin64\bin\gfortran.exe
 AS=as
 
 # Macros
-CND_PLATFORM=GNU-MacOSX
-CND_DLIB_EXT=dylib
+CND_PLATFORM=Cygwin-Windows
+CND_DLIB_EXT=dll
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
